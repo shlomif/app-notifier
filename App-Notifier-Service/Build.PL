@@ -11,6 +11,9 @@ my $builder = Test::Run::Builder->new(
     dist_author => q{Shlomi Fish <shlomif@cpan.org>},
     dist_version_from => 'lib/App/Notifier/Service.pm',
     dist_abstract => 'HTTP service to notify that an event happened.',
+    configure_requires => {
+        'Module::Build' => '0.39',
+    },
     requires => {
         'YAML'       => 0,
         'Dancer'     => '1.3097',

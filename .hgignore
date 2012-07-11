@@ -1,5 +1,7 @@
 App-Notifier-Service/_build
 App-Notifier-Service/blib
 App-Notifier-Service/Build
+App-Notifier-Service/META.json
+App-Notifier-Service/META.yml
 App-Notifier-Service/MYMETA.json
 App-Notifier-Service/MYMETA.yml
