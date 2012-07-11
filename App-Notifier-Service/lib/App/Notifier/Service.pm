@@ -1,10 +1,22 @@
 package App::Notifier::Service;
 use Dancer ':syntax';
 
-our $VERSION = '0.0100';
+our $VERSION = '0.0200';
 
 use File::Spec;
 use YAML::XS qw( LoadFile );
+
+use POSIX ":sys_wait_h";
+use Errno;
+
+sub _REAPER {
+   local $!;   # don't let waitpid() overwrite current error
+   while ((my $pid = waitpid(-1, WNOHANG)) > 0 && WIFEXITED($?)) {
+   }
+   $SIG{CHLD} = \&_REAPER;  # loathe SysV
+}
+
+$SIG{CHLD} = \&_REAPER;
 
 my $config_fn = ($ENV{'NOTIFIER_CONFIG'}
     || File::Spec->catfile($ENV{HOME}, '.app_notifier.yml'));
@@ -21,13 +33,21 @@ get '/notify' => sub {
     if (defined($cmd))
     {
         my @cmd_line = ((ref($cmd) eq 'ARRAY') ? @$cmd : $cmd);
-        system { $cmd_line[0] } @cmd_line;
-        return "Success.";
+        my $pid;
+        if (!defined($pid = fork())) {
+            die "Cannot fork: $!";
+        }
+        elsif (!$pid) {
+            # I'm the child.
+            system { $cmd_line[0] } @cmd_line;
+            exit(0);
+        }
+        return "Success.\n";
     }
     else
     {
         debug "Unknown Command ID '$cmd_id'.";
-        return "Unknown Command ID.";
+        return "Unknown Command ID.\n";
     }
 };
 
@@ -48,10 +68,25 @@ notifying that an event (such as the finish of a task) occured.
 
 =head1 SYNOPSIS
 
-    # Prepare a YAML file in ~/.app_notifier.yml with commands key that
-    # has a default item with a command line command.
+    # Prepare a YAML file in ~/.app_notifier.yml with content like this:
 
+    $ cat <<EOF > ~/.app_notifier.yml
+    commands:
+        default:
+            - /home/shlomif/bin/desktop-finish-cue
+        shine:
+            - /home/shlomif/bin/desktop-finish-cue
+            - "--song"
+            - "/home/music/Music/dosd-mp3s/Carmen and Camille - Shine 4U"
+    EOF
+
+    # Run the Dancer application
     ./bin/app.pl
+
+    # When you want to notify that an event occured:
+    $ curl 'http://127.0.0.1:3000/notify'
+    $ curl 'http://127.0.0.1:3000/notify?cmd_id=shine'
+
 
 =head1 AUTHOR
 

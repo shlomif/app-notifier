@@ -1,5 +1,6 @@
 bin/app.pl
 Build.PL
+Changes
 config.yml
 environments/development.yml
 environments/production.yml
