@@ -72,6 +72,8 @@ notifying that an event (such as the finish of a task) occured.
 
     $ cat <<EOF > ~/.app_notifier.yml
     commands:
+        # These entries contain command lines that get invoked after the
+        # notification is received. They can be either strings or arrays.
         default:
             - /home/shlomif/bin/desktop-finish-cue
         shine:
@@ -80,8 +82,13 @@ notifying that an event (such as the finish of a task) occured.
             - "/home/music/Music/dosd-mp3s/Carmen and Camille - Shine 4U"
     EOF
 
-    # Run the Dancer application
+    # Run the Dancer application from the distribution's root directory.
     ./bin/app.pl
+
+    # Alternatively run the following Perl code:
+    use Dancer;
+    use App::Notifier::Service;
+    dance;
 
     # When you want to notify that an event occured:
     $ curl 'http://127.0.0.1:3000/notify'
