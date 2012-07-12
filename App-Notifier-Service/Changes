@@ -1,4 +1,8 @@
+0.0201      Thu Jul 12 11:28:14 IDT 2012
     * Some clarifications to the documentation thanks to ironcamel.
+    * Fix the link to the repository in Build.PL/META.yml/META.json.
+        - https://bitbucket.org/shlomif/app-notifier/issue/1
+        - Thanks to ironcamel.
 
 0.0200      Wed Jul 11 16:44:15 IDT 2012
     * Add more documentation with examples.

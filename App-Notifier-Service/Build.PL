@@ -25,8 +25,8 @@ my $builder = Test::Run::Builder->new(
     {
         resources =>
         {
-            repository => "http://bitbucket.org/shlomif/perl-app-notifier",
-            homepage => "http://www.shlomifish.org/open-source/projects/Notifier/",
+            repository => "https://bitbucket.org/shlomif/app-notifier",
+            homepage => "http://www.shlomifish.org/open-source/projects/App-Notifier/",
         },
         keywords =>
         [
