@@ -15,8 +15,12 @@ my $builder = Test::Run::Builder->new(
         'Module::Build' => '0.39',
     },
     requires => {
-        'YAML'       => 0,
         'Dancer'     => '1.3097',
+        'Errno' => 0,
+        'File::Spec' => 0,
+        'POSIX' => 0,
+        'YAML'       => 0,
+        'YAML::XS'       => 0,
     },
     build_requires => {
         'Test::More' => 0,

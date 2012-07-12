@@ -1,3 +1,7 @@
+    * Build.PL: add a requires on YAML::XS (and some other referenced
+    modules), due to test failures:
+        - http://www.cpantesters.org/cpan/report/7013729c-cbaa-11e1-9066-3d54fb7543f5
+
 0.0201      Thu Jul 12 11:28:14 IDT 2012
     * Some clarifications to the documentation thanks to ironcamel.
     * Fix the link to the repository in Build.PL/META.yml/META.json.
