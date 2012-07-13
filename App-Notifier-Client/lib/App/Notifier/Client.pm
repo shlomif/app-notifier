@@ -16,7 +16,10 @@ sub notify
     my $cmd_id = $args->{cmd_id};
 
     my $ua = LWP::UserAgent->new;
-    my $url = URI->new($base_url);
+    my $url = URI->new($base_url .
+        ($base_url =~ m#/\z# ? '' : '/') .
+        'notify'
+    );
 
     if (defined($cmd_id))
     {
