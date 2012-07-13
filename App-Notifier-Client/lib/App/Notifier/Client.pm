@@ -62,6 +62,18 @@ App::Notifier::Client - a client library for App::Notifier::Service
     );
     1;
 
+=head1 DESCRIPTION
+
+This module is used to invoke a notification at a remote
+L<App::Notifier::Service> . It provides one class method - notify() .
+
+=head1 METHODS
+
+=head2 App::Notifier::Client->notify({ base_url => $url })
+
+Sends a notification to the service at the base_url of $url .
+If cmd_id is specified, it is also used (see the synopsis).
+
 =head1 AUTHOR
 
 Shlomi Fish, L<http://www.shlomifish.org/> .
