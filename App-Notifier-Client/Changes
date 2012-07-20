@@ -1,0 +1,7 @@
+0.0101
+    - Removed temporary files (ending with "*~") from the distribution.
+    - Add the "Changes" file.
+    - Add the "README" file.
+
+0.0100
+    First release.
