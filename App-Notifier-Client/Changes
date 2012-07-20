@@ -2,6 +2,7 @@
     - Removed temporary files (ending with "*~") from the distribution.
     - Add the "Changes" file.
     - Add the "README" file.
+    - Now installing bin/notifier to /usr/local/bin/ or a similar path.
 
 0.0100
     First release.
