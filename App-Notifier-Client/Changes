@@ -1,3 +1,4 @@
+0.0102      Fri 20 Jul 19:38:20 IDT 2012
     - Add "use YAML::XS" for LoadFile.
         - it threw an error previously.
 
