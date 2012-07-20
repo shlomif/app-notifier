@@ -1,3 +1,6 @@
+    - Add "use YAML::XS" for LoadFile.
+        - it threw an error previously.
+
 0.0101      Fri 20 Jul 19:29:16 IDT 2012
     - Removed temporary files (ending with "*~") from the distribution.
     - Add the "Changes" file.

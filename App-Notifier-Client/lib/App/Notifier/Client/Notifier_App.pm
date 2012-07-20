@@ -6,6 +6,8 @@ use warnings;
 use Getopt::Long qw(GetOptionsFromArray);
 use Pod::Usage;
 
+use YAML::XS qw( LoadFile );
+
 use App::Notifier::Client;
 
 =head1 NAME
