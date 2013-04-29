@@ -82,11 +82,11 @@ notifying that an event (such as the finish of a task) occured.
             - "/home/music/Music/dosd-mp3s/Carmen and Camille - Shine 4U"
     EOF
 
-    # Run the Dancer application from the distribution's root directory.
+    # Run the Dancer2 application from the distribution's root directory.
     ./bin/app.pl
 
     # Alternatively run the following Perl code:
-    use Dancer;
+    use Dancer2;
     use App::Notifier::Service;
     dance;
 
