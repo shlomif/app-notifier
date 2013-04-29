@@ -1,5 +1,5 @@
 package App::Notifier::Service;
-use Dancer ':syntax';
+use Dancer2 ':syntax';
 
 our $VERSION = '0.0202';
 
