@@ -19,6 +19,7 @@ my $builder = Test::Run::Builder->new(
         'Errno' => 0,
         'File::Spec' => 0,
         'JSON::MaybeXS' => 0,
+        'List::MoreUtils' => 0,
         'perl' => '5.014',
         'POSIX' => 0,
         'YAML'       => 0,
