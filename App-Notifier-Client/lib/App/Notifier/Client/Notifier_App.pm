@@ -96,7 +96,7 @@ sub run
 
     my $help = 0;
     my $man = 0;
-    my ($to, $url, $cmd_id);
+    my ($to, $url, $cmd_id, $msg);
     if (! (my $ret = GetOptionsFromArray(
         $argv,
         'help|h' => \$help,
@@ -104,6 +104,7 @@ sub run
         'to=s' => \$to,
         'url=s' => \$url,
         'cmd=s' => \$cmd_id,
+        'msg=s' => \$msg,
     )))
     {
         die "GetOptions failed!";
@@ -150,6 +151,7 @@ sub run
         {
             base_url => $url,
             ( defined($cmd_id) ? (cmd_id => $cmd_id) : () ),
+            ( defined($msg) ? (msg => $msg) : () ),
         }
     );
 

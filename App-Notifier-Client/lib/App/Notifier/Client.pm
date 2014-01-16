@@ -6,6 +6,8 @@ use warnings;
 use LWP::UserAgent;
 use URI;
 
+use JSON::MaybeXS qw(encode_json);
+
 sub notify
 {
     my $class = shift;
@@ -14,6 +16,7 @@ sub notify
 
     my $base_url = $args->{base_url};
     my $cmd_id = $args->{cmd_id};
+    my $msg = $args->{msg};
 
     my $ua = LWP::UserAgent->new;
     my $url = URI->new($base_url .
@@ -21,10 +24,19 @@ sub notify
         'notify'
     );
 
+    my $query = [];
+
     if (defined($cmd_id))
     {
-        $url->query_form('cmd_id' => $cmd_id);
+        push @$query, (cmd_id => $cmd_id);
     }
+
+    if (defined($msg))
+    {
+        push @$query, (text_params => scalar(encode_json({msg => $msg,})));
+    }
+
+    $url->query_form($query);
 
     my $response = $ua->get($url);
 
@@ -63,6 +75,14 @@ App::Notifier::Client - a client library for App::Notifier::Service
             base_url => 'http://localhost:6300/',
         }
     );
+
+    # Without msg
+    App::Notifier::Client->notify(
+        {
+            base_url => 'http://localhost:6300/',
+            msg => "Compilation Finished",
+        }
+    );
     1;
 
 =head1 DESCRIPTION
@@ -75,7 +95,8 @@ L<App::Notifier::Service> . It provides one class method - notify() .
 =head2 App::Notifier::Client->notify({ base_url => $url })
 
 Sends a notification to the service at the base_url of $url .
-If cmd_id is specified, it is also used (see the synopsis).
+If C<'cmd_id'> is specified, it is also used (see the synopsis). If
+C<'msg'> is specified, it is sent as well.
 
 =head1 AUTHOR
 
