@@ -30,7 +30,7 @@ my $config;
 
 sub _process_cmd_line_arg
 {
-    my ($arg, $text_params);
+    my ($arg, $text_params) = @_;
 
     if (ref($arg) eq '')
     {
