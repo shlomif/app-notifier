@@ -1,10 +1,15 @@
 package App::Notifier::Service;
+
+use 5.014;
+
 use Dancer ':syntax';
 
 our $VERSION = '0.0202';
 
 use File::Spec;
 use YAML::XS qw( LoadFile );
+use JSON::MaybeXS qw(decode_json);
+use List::MoreUtils qw();
 
 use POSIX ":sys_wait_h";
 use Errno;
@@ -23,21 +28,83 @@ my $config_fn = ($ENV{'NOTIFIER_CONFIG'}
 
 my $config;
 
+sub _process_cmd_line_arg
+{
+    my ($arg, $text_params);
+
+    if (ref($arg) eq '')
+    {
+        return $arg;
+    }
+    elsif (ref($arg) eq 'HASH')
+    {
+        if ($arg->{type} eq 'text_param')
+        {
+            return ($text_params->{$arg->{param_name}} // '');
+        }
+        else
+        {
+            die +{ msg => "Unknown special argument type $arg->{type}", };
+        }
+    }
+    else
+    {
+        die +{ msg => "Unhandled perl type for argument in command line template (should be string or hash.", };
+    }
+
+    return;
+}
+
 get '/notify' => sub {
 
     $config ||= LoadFile($config_fn);
 
     my $cmd_id = (params->{cmd_id} || 'default');
+    my $text_params = {};
+    if (defined(my $text_params_as_json = params->{text_params}))
+    {
+        $text_params = decode_json($text_params_as_json);
+        if (ref($text_params) ne 'HASH')
+        {
+            return "Invalid text_params - should be a JSON hash.\n";
+        }
+        elsif (List::MoreUtils::any { ref($_) ne '' } values(%$text_params))
+        {
+            return "Invalid text_params - all values must be strings.\n";
+        }
+    }
     my $cmd = $config->{commands}->{$cmd_id};
 
     if (defined($cmd))
     {
-        my @cmd_line = ((ref($cmd) eq 'ARRAY') ? @$cmd : $cmd);
+        my @before_cmd_line = ((ref($cmd) eq 'ARRAY') ? @$cmd : $cmd);
+
+        my @cmd_line =
+        eval {
+            map {
+            _process_cmd_line_arg($_, $text_params);
+            } @before_cmd_line;
+        };
+
+        if (my $Err = $@)
+        {
+            if (ref($Err) eq 'HASH' and (exists($Err->{msg})))
+            {
+                return ($Err->{msg} . "\n");
+            }
+            else
+            {
+                die $Err;
+            }
+        }
+
         my $pid;
-        if (!defined($pid = fork())) {
+        if (!defined($pid = fork()))
+        {
             die "Cannot fork: $!";
         }
-        elsif (!$pid) {
+        elsif (!$pid)
+        {
             # I'm the child.
             system { $cmd_line[0] } @cmd_line;
             exit(0);
@@ -80,6 +147,9 @@ notifying that an event (such as the finish of a task) occured.
             - /home/shlomif/bin/desktop-finish-cue
             - "--song"
             - "/home/music/Music/dosd-mp3s/Carmen and Camille - Shine 4U"
+            - "--message"
+            - type: "text_param"
+              param_name: "msg"
     EOF
 
     # Run the Dancer application from the distribution's root directory.

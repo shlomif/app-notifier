@@ -1,3 +1,7 @@
+0.0300
+    * Add support for passing text_params into the service. Useful for
+    messages/etc.
+
 0.0202      Thu Jul 12 11:42:35 IDT 2012
     * Build.PL: add a requires on YAML::XS (and some other referenced
     modules), due to test failures:
