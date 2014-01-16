@@ -1,3 +1,6 @@
+0.0200      Thu 16 Jan 19:19:28 IST 2014
+    - Add the --msg command line argument.
+
 0.0102      Fri 20 Jul 19:38:20 IDT 2012
     - Add "use YAML::XS" for LoadFile.
         - it threw an error previously.
