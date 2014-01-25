@@ -3,6 +3,10 @@ package App::Notifier::Client::Notifier_App;
 use strict;
 use warnings;
 
+use vars qw($VERSION);
+
+$VERSION = '0.0202';
+
 use Getopt::Long qw(GetOptionsFromArray);
 use Pod::Usage;
 

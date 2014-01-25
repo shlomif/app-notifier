@@ -3,6 +3,10 @@ package App::Notifier::Client;
 use strict;
 use warnings;
 
+use vars qw($VERSION);
+
+$VERSION = '0.0202';
+
 use LWP::UserAgent;
 use URI;
 
