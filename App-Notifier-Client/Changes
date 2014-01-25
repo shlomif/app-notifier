@@ -1,23 +1,24 @@
-0.0202
+0.0202  2014-01-25
     - Add $VERSION for the .pm files under lib/ .
         - Kwalitee and good style.
+    - Check for CPAN::Changes compatibility.
 
-0.0201      Tue 21 Jan 09:52:45 IST 2014
+0.0201  2014-01-21
     - Minimum dependency on Getopt::Long-2.36.
         - Fix tests such as http://www.cpantesters.org/cpan/report/75553bd6-81e9-11e3-b4a0-401c3071082f
 
-0.0200      Thu 16 Jan 19:19:28 IST 2014
+0.0200  2014-01-16
     - Add the --msg command line argument.
 
-0.0102      Fri 20 Jul 19:38:20 IDT 2012
+0.0102  2012-07-20
     - Add "use YAML::XS" for LoadFile.
         - it threw an error previously.
 
-0.0101      Fri 20 Jul 19:29:16 IDT 2012
+0.0101  2012-07-20
     - Removed temporary files (ending with "*~") from the distribution.
     - Add the "Changes" file.
     - Add the "README" file.
     - Now installing bin/notifier to /usr/local/bin/ or a similar path.
 
-0.0100
+0.0100 2012-07-20
     First release.
