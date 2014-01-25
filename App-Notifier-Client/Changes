@@ -1,3 +1,7 @@
+0.0202
+    - Add $VERSION for the .pm files under lib/ .
+        - Kwalitee and good style.
+
 0.0201      Tue 21 Jan 09:52:45 IST 2014
     - Minimum dependency on Getopt::Long-2.36.
         - Fix tests such as http://www.cpantesters.org/cpan/report/75553bd6-81e9-11e3-b4a0-401c3071082f
