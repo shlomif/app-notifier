@@ -6,7 +6,6 @@ environments/development.yml
 environments/production.yml
 inc/Test/Run/Builder.pm
 lib/App/Notifier/Service.pm
-Makefile.PL
 MANIFEST
 MANIFEST.SKIP
 META.json
