@@ -3,6 +3,7 @@
         - It was a leftover and no longer relevant.
     * Add a README.
     * Add t/style-trailing-space.t and remove trailing space.
+    * Add t/pod-coverage.t t/pod.t.
 
 0.0300  2014-01-16
     * Add support for passing text_params into the service. Useful for
