@@ -2,6 +2,7 @@
     - Add a minimum version of perl in META.yml/Build.PL (and in the
     modules).
         - Kwalitee
+    - Add a test for trailing space.
 
 0.0202  2014-01-25
     - Add $VERSION for the .pm files under lib/ .
