@@ -7,6 +7,8 @@ use vars qw($VERSION);
 
 $VERSION = '0.0202';
 
+use 5.012;
+
 use Getopt::Long qw(GetOptionsFromArray);
 use Pod::Usage;
 

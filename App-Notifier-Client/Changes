@@ -1,3 +1,8 @@
+0.0203  2014-01-26
+    - Add a minimum version of perl in META.yml/Build.PL (and in the
+    modules).
+        - Kwalitee
+
 0.0202  2014-01-25
     - Add $VERSION for the .pm files under lib/ .
         - Kwalitee and good style.
