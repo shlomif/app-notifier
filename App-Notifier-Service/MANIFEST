@@ -24,5 +24,6 @@ README
 t/001_base.t
 t/002_index_route.t
 t/cpan-changes.t
+t/style-trailing-space.t
 views/index.tt
 views/layouts/main.tt
