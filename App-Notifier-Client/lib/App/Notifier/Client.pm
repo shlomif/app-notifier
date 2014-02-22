@@ -82,7 +82,7 @@ App::Notifier::Client - a client library for App::Notifier::Service
         }
     );
 
-    # Without msg
+    # With a msg
     App::Notifier::Client->notify(
         {
             base_url => 'http://localhost:6300/',
