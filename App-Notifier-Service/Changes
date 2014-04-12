@@ -1,6 +1,7 @@
 0.0400  2014-04-12
     * bin/app.pl: add SIGINT handling to exit(0) so Ctrl+C won't warn in the
     konsole and just dismiss the service.
+    * Add separate LICENSE file (CPANTS).
 
 0.0301  2014-01-26
     * Remove Makefile.PL from the distribution.
