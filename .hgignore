@@ -6,4 +6,4 @@ App-Notifier-Service/META.json
 App-Notifier-Service/META.yml
 App-Notifier-Service/MYMETA.json
 App-Notifier-Service/MYMETA.yml
-App-Notifier-Client/App-Notifier-Client-*
+App-Notifier-Client/.build
