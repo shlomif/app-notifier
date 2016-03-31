@@ -110,7 +110,7 @@ sub run
         'to=s' => \$to,
         'url=s' => \$url,
         'cmd=s' => \$cmd_id,
-        'msg=s' => \$msg,
+        'msg|m=s' => \$msg,
     )))
     {
         die "GetOptions failed!";

@@ -1,3 +1,7 @@
+0.0300  2016-03-31
+    - Add an "-m" option for the command line client as a shortened form
+    of "--msg".
+
 0.0204  2015-05-30
     - Add a link to the VCS repository (in bitbucket.org).
 

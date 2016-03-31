@@ -23,9 +23,10 @@ notifier -- A command line client for the HTTP L<App::Notifier::Service>.
 =head1 OPTIONS
 
     --to=$HOST - the identifier of the target URL in the configuration file.
-    --url=$URL - the URL (overrides -to)
+    --url=$URL - the URL (overrides "-to")
     --cmd=$CMD - the command ID to notify about (see App::Notifier::Service)
     --msg="$MSG" - the message to display (using text_params)
+    -m "$MSG"    - same as --msg="$MSG"
 
 =head1 DESCRIPTION
 
