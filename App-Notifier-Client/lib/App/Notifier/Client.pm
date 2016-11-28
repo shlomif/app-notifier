@@ -3,9 +3,7 @@ package App::Notifier::Client;
 use strict;
 use warnings;
 
-use vars qw($VERSION);
-
-$VERSION = '0.0300';
+our $VERSION = '0.0300';
 
 use 5.012;
 
