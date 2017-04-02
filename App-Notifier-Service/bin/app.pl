@@ -12,6 +12,6 @@ use App::Notifier::Service;
     local $SIG{INT} = sub {
         exit(0);
     };
-    local $SIG{CHLD} = 'IGNORE';
+    # local $SIG{CHLD} = 'IGNORE';
     dance;
 }
