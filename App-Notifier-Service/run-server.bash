@@ -1,1 +1,1 @@
-perl -Ilib bin/app.pl --port=6300
+perl -I"`pwd`/lib" bin/app.pl --port=6300
