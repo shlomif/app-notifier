@@ -57,65 +57,19 @@ sub _process_cmd_line_arg
 
 get '/notify' => sub {
 
-    $config ||= LoadFile($config_fn);
-
-    my $cmd_id = (params->{cmd_id} || 'default');
-    my $text_params = {};
-    if (defined(my $text_params_as_json = params->{text_params}))
+    my @cmd_line = ('mpv', '/path/to/non-exist.webm');
+    my $pid;
+    if (!defined($pid = fork()))
     {
-        $text_params = decode_json($text_params_as_json);
-        if (ref($text_params) ne 'HASH')
-        {
-            return "Invalid text_params - should be a JSON hash.\n";
-        }
-        elsif (List::MoreUtils::any { ref($_) ne '' } values(%$text_params))
-        {
-            return "Invalid text_params - all values must be strings.\n";
-        }
+        die "Cannot fork: $!";
     }
-    my $cmd = $config->{commands}->{$cmd_id};
-
-    if (defined($cmd))
+    elsif (!$pid)
     {
-        my @before_cmd_line = ((ref($cmd) eq 'ARRAY') ? @$cmd : $cmd);
-
-        my @cmd_line =
-        eval {
-            map {
-            _process_cmd_line_arg($_, $text_params);
-            } @before_cmd_line;
-        };
-
-        if (my $Err = $@)
-        {
-            if (ref($Err) eq 'HASH' and (exists($Err->{msg})))
-            {
-                return ($Err->{msg} . "\n");
-            }
-            else
-            {
-                die $Err;
-            }
-        }
-
-        my $pid;
-        if (!defined($pid = fork()))
-        {
-            die "Cannot fork: $!";
-        }
-        elsif (!$pid)
-        {
-            # I'm the child.
-            system { $cmd_line[0] } @cmd_line;
-            exit(0);
-        }
-        return "Success.\n";
+        # I'm the child.
+        system { $cmd_line[0] } @cmd_line;
+        exit(0);
     }
-    else
-    {
-        debug "Unknown Command ID '$cmd_id'.";
-        return "Unknown Command ID.\n";
-    }
+    return "Success.\n";
 };
 
 get '/' => sub {
