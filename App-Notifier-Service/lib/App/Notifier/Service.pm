@@ -30,8 +30,11 @@ get '/notify' => sub {
     }
     elsif (!$pid)
     {
-        # I'm the child.
-        system { $cmd_line[0] } @cmd_line;
+        if (fork() eq 0)
+        {
+            # I'm the child.
+            system { $cmd_line[0] } @cmd_line;
+        }
         exit(0);
     }
     return "Success.\n";
