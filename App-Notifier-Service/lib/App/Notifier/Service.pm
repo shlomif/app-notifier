@@ -18,7 +18,7 @@ sub _REAPER {
    $SIG{CHLD} = \&_REAPER;  # loathe SysV
 }
 
-$SIG{CHLD} = \&_REAPER;
+# $SIG{CHLD} = \&_REAPER;
 
 get '/notify' => sub {
 
@@ -35,7 +35,11 @@ get '/notify' => sub {
             # I'm the child.
             system { $cmd_line[0] } @cmd_line;
         }
-        exit(0);
+        POSIX::_exit(0);
+    }
+    else
+    {
+        waitpid($pid, 0);
     }
     return "Success.\n";
 };
