@@ -1,3 +1,9 @@
+0.0401  2017-04-14
+    * Avoid spawning zombie processes after forking to execute commands.
+        - See:
+        - http://lists.preshweb.co.uk/pipermail/dancer-users/2017-April/005781.html
+        - Thanks to Andy and to racke for helping.
+
 0.0400  2014-04-12
     * bin/app.pl: add SIGINT handling to exit(0) so Ctrl+C won't warn in the
     konsole and just dismiss the service.

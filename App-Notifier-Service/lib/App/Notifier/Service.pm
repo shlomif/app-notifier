@@ -21,7 +21,7 @@ sub _REAPER {
    $SIG{CHLD} = \&_REAPER;  # loathe SysV
 }
 
-$SIG{CHLD} = \&_REAPER;
+# $SIG{CHLD} = \&_REAPER;
 
 my $config_fn = ($ENV{'NOTIFIER_CONFIG'}
     || File::Spec->catfile($ENV{HOME}, '.app_notifier.yml'));
@@ -106,8 +106,16 @@ get '/notify' => sub {
         elsif (!$pid)
         {
             # I'm the child.
-            system { $cmd_line[0] } @cmd_line;
-            exit(0);
+            if (fork() eq 0)
+            {
+                # I'm the grandchild.
+                system { $cmd_line[0] } @cmd_line;
+            }
+            POSIX::_exit(0);
+        }
+        else
+        {
+            waitpid($pid, 0);
         }
         return "Success.\n";
     }
