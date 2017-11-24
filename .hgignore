@@ -1,9 +1,10 @@
+App-Notifier-Client/.build
+App-Notifier-Service/.tidyall.d
 App-Notifier-Service/App-Notifier-Service-*
-App-Notifier-Service/_build
-App-Notifier-Service/blib
 App-Notifier-Service/Build
 App-Notifier-Service/META.json
 App-Notifier-Service/META.yml
 App-Notifier-Service/MYMETA.json
 App-Notifier-Service/MYMETA.yml
-App-Notifier-Client/.build
+App-Notifier-Service/_build
+App-Notifier-Service/blib
