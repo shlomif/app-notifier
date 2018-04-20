@@ -2,13 +2,12 @@ package App::Notifier::Service;
 
 use 5.014;
 
-use Dancer ':syntax';
+use Dancer2;
 
 our $VERSION = '0.0401';
 
 use File::Spec;
 use YAML::XS qw( LoadFile );
-use JSON::MaybeXS qw(decode_json);
 use List::MoreUtils qw();
 
 use POSIX ":sys_wait_h";
@@ -130,7 +129,8 @@ get '/' => sub {
     template 'index';
 };
 
-true;
+# true;
+start;
 
 __END__
 
