@@ -129,8 +129,8 @@ get '/' => sub {
     template 'index';
 };
 
-# true;
-start;
+true;
+# start;
 
 __END__
 
