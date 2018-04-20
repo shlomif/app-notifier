@@ -161,12 +161,12 @@ notifying that an event (such as the finish of a task) occured.
     EOF
 
     # Run the Dancer application from the distribution's root directory.
-    ./bin/app.pl
+    plackup ./bin/app.psgi
 
     # Alternatively run the following Perl code:
-    use Dancer;
+    use Dancer2;
     use App::Notifier::Service;
-    dance;
+    start;
 
     # When you want to notify that an event occured:
     $ curl 'http://127.0.0.1:3000/notify'
