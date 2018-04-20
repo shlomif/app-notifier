@@ -4,7 +4,7 @@ use 5.014;
 
 use Dancer2;
 
-our $VERSION = '0.0401';
+our $VERSION = '0.0600';
 
 use File::Spec;
 use YAML::XS qw( LoadFile );

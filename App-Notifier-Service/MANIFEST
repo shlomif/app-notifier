@@ -1,6 +1,7 @@
 .perltidyrc
 .tidyallrc
 bin/app.pl
+bin/app.psgi
 Build.PL
 Changes
 config.yml
