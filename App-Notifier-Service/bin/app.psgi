@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+# PODNAME: app.psgi .
 
 use strict;
 use warnings;
