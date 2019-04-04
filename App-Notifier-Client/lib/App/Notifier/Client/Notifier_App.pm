@@ -3,10 +3,6 @@ package App::Notifier::Client::Notifier_App;
 use strict;
 use warnings;
 
-use vars qw($VERSION);
-
-$VERSION = '0.0300';
-
 use 5.012;
 
 use Getopt::Long qw(GetOptionsFromArray);
