@@ -1,4 +1,5 @@
 App-Notifier-Client/.build
+App-Notifier-Client/.tidyall.d
 App-Notifier-Service/.tidyall.d
 App-Notifier-Service/App-Notifier-Service-*
 App-Notifier-Service/Build
