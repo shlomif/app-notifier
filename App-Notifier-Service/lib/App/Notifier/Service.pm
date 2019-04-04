@@ -13,33 +13,35 @@ use List::MoreUtils qw();
 use POSIX ":sys_wait_h";
 use Errno;
 
-sub _REAPER {
-   local $!;   # don't let waitpid() overwrite current error
-   while ((my $pid = waitpid(-1, WNOHANG)) > 0 && WIFEXITED($?)) {
-   }
-   $SIG{CHLD} = \&_REAPER;  # loathe SysV
+sub _REAPER
+{
+    local $!;    # don't let waitpid() overwrite current error
+    while ( ( my $pid = waitpid( -1, WNOHANG ) ) > 0 && WIFEXITED($?) )
+    {
+    }
+    $SIG{CHLD} = \&_REAPER;    # loathe SysV
 }
 
 # $SIG{CHLD} = \&_REAPER;
 
-my $config_fn = ($ENV{'NOTIFIER_CONFIG'}
-    || File::Spec->catfile($ENV{HOME}, '.app_notifier.yml'));
+my $config_fn = ( $ENV{'NOTIFIER_CONFIG'}
+        || File::Spec->catfile( $ENV{HOME}, '.app_notifier.yml' ) );
 
 my $config;
 
 sub _process_cmd_line_arg
 {
-    my ($arg, $text_params) = @_;
+    my ( $arg, $text_params ) = @_;
 
-    if (ref($arg) eq '')
+    if ( ref($arg) eq '' )
     {
         return $arg;
     }
-    elsif (ref($arg) eq 'HASH')
+    elsif ( ref($arg) eq 'HASH' )
     {
-        if ($arg->{type} eq 'text_param')
+        if ( $arg->{type} eq 'text_param' )
         {
-            return ($text_params->{$arg->{param_name}} // '');
+            return ( $text_params->{ $arg->{param_name} } // '' );
         }
         else
         {
@@ -48,7 +50,9 @@ sub _process_cmd_line_arg
     }
     else
     {
-        die +{ msg => "Unhandled perl type for argument in command line template (should be string or hash.", };
+        die +{ msg =>
+"Unhandled perl type for argument in command line template (should be string or hash.",
+        };
     }
 
     return;
@@ -58,38 +62,35 @@ get '/notify' => sub {
 
     $config ||= LoadFile($config_fn);
 
-    my $cmd_id = (params->{cmd_id} || 'default');
+    my $cmd_id      = ( params->{cmd_id} || 'default' );
     my $text_params = {};
-    if (defined(my $text_params_as_json = params->{text_params}))
+    if ( defined( my $text_params_as_json = params->{text_params} ) )
     {
         $text_params = decode_json($text_params_as_json);
-        if (ref($text_params) ne 'HASH')
+        if ( ref($text_params) ne 'HASH' )
         {
             return "Invalid text_params - should be a JSON hash.\n";
         }
-        elsif (List::MoreUtils::any { ref($_) ne '' } values(%$text_params))
+        elsif ( List::MoreUtils::any { ref($_) ne '' } values(%$text_params) )
         {
             return "Invalid text_params - all values must be strings.\n";
         }
     }
     my $cmd = $config->{commands}->{$cmd_id};
 
-    if (defined($cmd))
+    if ( defined($cmd) )
     {
-        my @before_cmd_line = ((ref($cmd) eq 'ARRAY') ? @$cmd : $cmd);
+        my @before_cmd_line = ( ( ref($cmd) eq 'ARRAY' ) ? @$cmd : $cmd );
 
-        my @cmd_line =
-        eval {
-            map {
-            _process_cmd_line_arg($_, $text_params);
-            } @before_cmd_line;
+        my @cmd_line = eval {
+            map { _process_cmd_line_arg( $_, $text_params ); } @before_cmd_line;
         };
 
-        if (my $Err = $@)
+        if ( my $Err = $@ )
         {
-            if (ref($Err) eq 'HASH' and (exists($Err->{msg})))
+            if ( ref($Err) eq 'HASH' and ( exists( $Err->{msg} ) ) )
             {
-                return ($Err->{msg} . "\n");
+                return ( $Err->{msg} . "\n" );
             }
             else
             {
@@ -98,14 +99,14 @@ get '/notify' => sub {
         }
 
         my $pid;
-        if (!defined($pid = fork()))
+        if ( !defined( $pid = fork() ) )
         {
             die "Cannot fork: $!";
         }
-        elsif (!$pid)
+        elsif ( !$pid )
         {
             # I'm the child.
-            if (fork() eq 0)
+            if ( fork() eq 0 )
             {
                 # I'm the grandchild.
                 system { $cmd_line[0] } @cmd_line;
@@ -114,7 +115,7 @@ get '/notify' => sub {
         }
         else
         {
-            waitpid($pid, 0);
+            waitpid( $pid, 0 );
         }
         return "Success.\n";
     }
@@ -130,6 +131,7 @@ get '/' => sub {
 };
 
 true;
+
 # start;
 
 __END__
