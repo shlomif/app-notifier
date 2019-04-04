@@ -3,8 +3,6 @@ package App::Notifier::Client;
 use strict;
 use warnings;
 
-our $VERSION = '0.0300';
-
 use 5.012;
 
 use LWP::UserAgent;
@@ -19,32 +17,31 @@ sub notify
     my ($args) = @_;
 
     my $base_url = $args->{base_url};
-    my $cmd_id = $args->{cmd_id};
-    my $msg = $args->{msg};
+    my $cmd_id   = $args->{cmd_id};
+    my $msg      = $args->{msg};
 
     my $ua = LWP::UserAgent->new;
-    my $url = URI->new($base_url .
-        ($base_url =~ m#/\z# ? '' : '/') .
-        'notify'
-    );
+    my $url =
+        URI->new( $base_url . ( $base_url =~ m#/\z# ? '' : '/' ) . 'notify' );
 
     my $query = [];
 
-    if (defined($cmd_id))
+    if ( defined($cmd_id) )
     {
-        push @$query, (cmd_id => $cmd_id);
+        push @$query, ( cmd_id => $cmd_id );
     }
 
-    if (defined($msg))
+    if ( defined($msg) )
     {
-        push @$query, (text_params => scalar(encode_json({msg => $msg,})));
+        push @$query,
+            ( text_params => scalar( encode_json( { msg => $msg, } ) ) );
     }
 
     $url->query_form($query);
 
     my $response = $ua->get($url);
 
-    if (! $response->is_success())
+    if ( !$response->is_success() )
     {
         die "Error " . $response->status_line();
     }

@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+# PODNAME: notifier
 
 use strict;
 use warnings;
