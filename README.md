@@ -4,3 +4,6 @@ as CPAN distributions:
 
 - [App-Notifier-Client](http://metacpan.org/release/App-Notifier-Client)
 - [App-Notifier-Service](http://metacpan.org/release/App-Notifier-Service)
+
+There is also a [page](https://www.shlomifish.org/open-source/projects/notifier-apps/)
+for them on my site.
