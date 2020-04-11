@@ -1,9 +1,12 @@
-import requests
+from flask import Flask, request
 
-from flask import Flask
+import requests
 
 app = Flask(__name__)
 
-@app.route('/')
-def hello():
-    return requests.get("http://192.168.1.192:6300/", params=app.params())
+
+@app.route('/notify')
+def notify():
+    requests.get(
+        "http://192.168.1.192:6300/notify", params=request.args)
+    return "OK"
