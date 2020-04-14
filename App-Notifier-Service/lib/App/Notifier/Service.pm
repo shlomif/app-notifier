@@ -125,7 +125,7 @@ get '/notify' => sub {
 };
 
 get '/' => sub {
-    template 'index';
+    return "OK\n";
 };
 
 true;
