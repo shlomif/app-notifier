@@ -4,7 +4,7 @@
 use strict;
 use warnings;
 
-use Dancer2;
+use Dancer2 0.300003;
 use App::Notifier::Service;
 
 {

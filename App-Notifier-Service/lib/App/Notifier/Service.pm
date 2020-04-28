@@ -2,9 +2,9 @@ package App::Notifier::Service;
 
 use 5.014;
 
-use Dancer2;
+use Dancer2 0.300003;
 
-use File::Spec;
+use File::Spec ();
 use YAML::XS qw( LoadFile );
 use List::MoreUtils qw();
 
@@ -164,7 +164,7 @@ notifying that an event (such as the finish of a task) occured.
     plackup ./bin/app.psgi
 
     # Alternatively run the following Perl code:
-    use Dancer2;
+    use Dancer2 0.300003;
     use App::Notifier::Service;
     start;
 
