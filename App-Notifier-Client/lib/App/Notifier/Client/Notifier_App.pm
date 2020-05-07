@@ -130,7 +130,11 @@ sub run
     {
         if ( !defined($to) )
         {
-            $to = 'default';
+            $to = $ENV{'NOTIFIER_TO'};
+            if ( !defined($to) )
+            {
+                $to = 'default';
+            }
         }
 
         my $config_fn = ( $ENV{'NOTIFIER_CONFIG'}
