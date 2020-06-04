@@ -10,5 +10,5 @@ const http = require("http"),
 // Create your proxy server and set the target in the options.
 //
 httpProxy
-    .createProxyServer({ target: "http://192.168.1.192:6300/" })
+    .createProxyServer({ target: "http://192.168.1.191:6300/" })
     .listen(6300);
