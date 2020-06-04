@@ -6,7 +6,7 @@ import requests
 
 app = Flask(__name__)
 
-REMOTE_HOST = os.getenv("NOTIFIER_PROXY_HOST", "192.168.1.192")
+REMOTE_HOST = os.getenv("NOTIFIER_PROXY_HOST", "192.168.1.191")
 REMOTE_PORT = os.getenv("NOTIFIER_PROXY_PORT", "6300")
 
 
