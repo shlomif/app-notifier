@@ -13,4 +13,15 @@ then
     export NOTIFIER_PROXY_PORT='6300'
 fi
 
-flask run --host=0.0.0.0 --port="${NOTIFIER_PROXY_PORT}"
+if test -z "$NOTIFIER_PROXY_HOSTNAME"
+then
+    NOTIFIER_PROXY_HOSTNAME='0.0.0.0'
+fi
+
+backend="$1"
+if test "$backend" = '--mojo'
+then
+    perl mojolicious.pl daemon -l "http://${NOTIFIER_PROXY_HOSTNAME}:${NOTIFIER_PROXY_PORT}"
+else
+    flask run --host="$NOTIFIER_PROXY_HOSTNAME" --port="${NOTIFIER_PROXY_PORT}"
+fi

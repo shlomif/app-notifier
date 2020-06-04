@@ -10,7 +10,7 @@ use Pod::Usage;
 
 use YAML::XS qw( LoadFile );
 
-use App::Notifier::Client;
+use App::Notifier::Client ();
 
 =head1 NAME
 

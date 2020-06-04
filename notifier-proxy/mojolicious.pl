@@ -13,8 +13,13 @@ get '/notify' => sub {
     my $hash = $c->req->params->to_hash();
     my $ua   = Mojo::UserAgent->new;
     my $res  = $ua->get(
-        "http://${REMOTE_HOST}:${REMOTE_PORT}/notify" => form => $hash );
-    return $res;
+        "http://${REMOTE_HOST}:${REMOTE_PORT}/notify" => form => $hash )
+        ->result();
+    if ( $res->is_error() )
+    {
+        die "error in connection: " . $res->message();
+    }
+    return $c->render( text => "OK" );
 };
 
 # Start the Mojolicious command system
