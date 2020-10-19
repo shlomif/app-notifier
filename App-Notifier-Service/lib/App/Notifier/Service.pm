@@ -177,43 +177,7 @@ notifying that an event (such as the finish of a task) occured.
 
 Shlomi Fish, L<http://www.shlomifish.org/> .
 
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-app-notifier-service at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=App-Notifier-Service>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
-
-=head1 SUPPORT
-
-You can find documentation for this module with the perldoc command.
-
-    perldoc App::Notifier::Service
-
-You can also look for information at:
-
-=over 4
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=App-Notifier-Service>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/App-Notifier-Service>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/App-Notifier-Service>
-
-=item * MetaCPAN
-
-L<http://metacpan.org/release/App-Notifier-Service>
-
-=back
-
-
 =head1 ACKNOWLEDGEMENTS
-
 
 =head1 COPYRIGHT & LICENSE
 
