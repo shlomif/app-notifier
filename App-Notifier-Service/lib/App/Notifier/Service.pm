@@ -2,7 +2,8 @@ package App::Notifier::Service;
 
 use 5.014;
 
-use Dancer2 0.300003;
+use Mojolicious::Lite -signatures;
+use Plack::Builder;
 
 use File::Spec ();
 use YAML::XS qw( LoadFile );
@@ -57,12 +58,13 @@ sub _process_cmd_line_arg
 }
 
 get '/notify' => sub {
+    my $c = shift;
 
     $config ||= LoadFile($config_fn);
 
-    my $cmd_id      = ( params->{cmd_id} || 'default' );
+    my $cmd_id      = ( $c->params->{cmd_id} || 'default' );
     my $text_params = {};
-    if ( defined( my $text_params_as_json = params->{text_params} ) )
+    if ( defined( my $text_params_as_json = $c->params->{text_params} ) )
     {
         $text_params = decode_json($text_params_as_json);
         if ( ref($text_params) ne 'HASH' )
@@ -119,16 +121,23 @@ get '/notify' => sub {
     }
     else
     {
-        debug "Unknown Command ID '$cmd_id'.";
+        $c->log("Unknown Command ID '$cmd_id'.");
         return "Unknown Command ID.\n";
     }
 };
 
 get '/' => sub {
-    return "OK\n";
+    my $c = shift;
+    $c->render( text => "OK\n" );
 };
 
-true;
+builder
+{
+    # enable 'Deflater';
+    app->start;
+};
+
+# "true";
 
 # start;
 
