@@ -6,6 +6,7 @@ use Mojolicious::Lite -signatures;
 use Plack::Builder;
 
 use File::Spec ();
+use JSON::MaybeXS qw( decode_json );
 use YAML::XS qw( LoadFile );
 use List::MoreUtils qw();
 
@@ -62,9 +63,9 @@ get '/notify' => sub {
 
     $config ||= LoadFile($config_fn);
 
-    my $cmd_id      = ( $c->params->{cmd_id} || 'default' );
+    my $cmd_id      = ( $c->req->param('cmd_id') || 'default' );
     my $text_params = {};
-    if ( defined( my $text_params_as_json = $c->params->{text_params} ) )
+    if ( defined( my $text_params_as_json = $c->req->param('text_params') ) )
     {
         $text_params = decode_json($text_params_as_json);
         if ( ref($text_params) ne 'HASH' )
