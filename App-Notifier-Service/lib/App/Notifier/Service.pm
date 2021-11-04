@@ -118,7 +118,7 @@ get '/notify' => sub {
         {
             waitpid( $pid, 0 );
         }
-        return "Success.\n";
+        $c->render( text => "Success.\n" );
     }
     else
     {
