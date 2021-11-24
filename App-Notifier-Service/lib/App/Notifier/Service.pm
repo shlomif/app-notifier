@@ -170,11 +170,10 @@ notifying that an event (such as the finish of a task) occured.
               param_name: "msg"
     EOF
 
-    # Run the Dancer application from the distribution's root directory.
+    # Run the Mojo application from the distribution's root directory.
     plackup ./bin/app.psgi
 
     # Alternatively run the following Perl code:
-    use Dancer2 0.300003;
     use App::Notifier::Service;
     start;
 
@@ -185,7 +184,7 @@ notifying that an event (such as the finish of a task) occured.
 
 =head1 AUTHOR
 
-Shlomi Fish, L<http://www.shlomifish.org/> .
+Shlomi Fish, L<https://www.shlomifish.org/> .
 
 =head1 ACKNOWLEDGEMENTS
 

@@ -4,7 +4,6 @@
 use strict;
 use warnings;
 
-use Dancer2 0.300003;
 use App::Notifier::Service;
 
 {
@@ -13,5 +12,5 @@ use App::Notifier::Service;
         exit(0);
     };
     local $SIG{CHLD} = 'IGNORE';
-    dance;
+    start();
 }
