@@ -2,7 +2,10 @@ package App::Notifier::Service;
 
 use 5.014;
 
-use Mojolicious::Lite -signatures;
+use strict;
+use warnings;
+
+use Mojolicious::Lite;
 use Plack::Builder;
 
 use File::Spec ();
